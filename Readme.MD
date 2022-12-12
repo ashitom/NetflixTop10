@@ -1,7 +1,7 @@
 # Exploring Weekly Top10 on Netflix
 ## Background
 <div style="text-align: justify">
-Beginning from June 28 2021, Netflix commenced publishing every week from its library, a list of top 10 shows for the week, by hours watched. The site for this is https://top10.netflix.com/. In it, you can filter the list by category of shows (TV (English), TV (Non-English), Films (English), Films (Non-English)) to see the Global top 10 movies for the week. Besides the global top 10 list, the site also presents weekly top 10 by country. This however, does not show hours viewed. One can also download the list of global top 10 in Excel Formert at the end of the page. It is a cumulative of the top 10 from June 28, 2021 to date.</div>
+Beginning from June 28 2021, Netflix commenced publishing every week from its library, a list of top 10 shows for the week, by hours watched. The site for this is https://top10.netflix.com/. In it, you can filter the list by category of shows (TV (English), TV (Non-English), Films (English), Films (Non-English)) to see the Global top 10 movies for the week. Besides the global top 10 list, the site also presents weekly top 10 by country. This however, does not show hours viewed. One can also download the list of global top 10 in Excel Formert at the end of the page. It is a cumulative of the top 10 shows from June 28, 2021 to date.</div>
 
 ## Research Interest
 * We want to create a site which recommends trending movies to a visitor
