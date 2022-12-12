@@ -19,4 +19,4 @@ Beginning from June 28 2021, Netflix commenced publishing every week from its li
 The breakdown tab allows our visitors to filter by genre and category to see the top movies based on their selected filters. They can also click a checkbox to see a full list of their selection ranked according to hours viewed.</div>
 
 ## Conclusion
-<div style="text-align: justify">Even though some movies stand out as overall best, using our ranking criteria, each visitor will get a different result depending on their preferences </div>
+<div style="text-align: justify">Even though some movies stand out as overall best using our ranking criteria, each visitor will get a different result depending on their preferences </div>
