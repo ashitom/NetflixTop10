@@ -52,14 +52,20 @@ def filtered_dataset(filtered_data):
     data = data.sort_values(by=['weekly_hours_viewed'],ascending=False).reset_index(drop=True)
     data['index'] = data.index
     return data
+
+def movie_filter():
+    data = raw_data['show_title'].unique()
+    data = np.array(data)
+    return data
+
 #setting some altair sliders to bind to our visualisation for filtering
 list_slider = alt.binding_range(min=10, max=50, step=1)
 slider_selection = alt.selection_single(bind=list_slider, fields=['index'], name="cutoff",init={'index':26})
 genre_slider = alt.binding_range(min=5, max=20, step=1)
 genre_slider_selection = alt.selection_single(bind=genre_slider, fields=['index'], name="cutoff",init={'index':10})
 
-#we create two tabs, one for overview and another to allow the user to make further filtering
-tab1, tab2 = st.tabs(['Overview','Breakdown'])
+#we create some tabs, one for overview and others to allow the user to make further filtering
+tab1, tab2, tab3 = st.tabs(['Overview','Breakdown','Movie Details'])
 #Define visuals for each tab
 with tab1:
     tab1.markdown('**Most watched titles on Netflix**')
@@ -167,3 +173,31 @@ with tab2:
         data.loc[:, "weekly_hours_viewed"] = data['weekly_hours_viewed'].map('{:,d}'.format)
         if show:
             st.dataframe(data, use_container_width=True)
+        
+with tab3:
+    col10, col11 = st.columns((1,4), gap='small')
+
+    with col10:
+        col10.markdown('**search specific movies to see more detail about them**')
+        selected_movie = st.multiselect("Select Mutiple movies to see more detail", movie_filter())
+
+    with col11:
+         if selected_movie:
+            data = raw_data[raw_data['show_title'].isin(selected_movie)]
+            data['week'] = pd.to_datetime(data['week'].astype(str), format='%m/%d/%Y')
+            data = data.sort_values(by=['week'],ascending=False).reset_index(drop=True)
+            trend = alt.Chart(data).mark_line(point=alt.OverlayMarkDef(color="show_title")).encode(
+                x='week',
+                y=alt.Y('weekly_rank',scale=alt.Scale(reverse=True)),
+                tooltip=[alt.Tooltip('week',title='Date'),
+                alt.Tooltip('weekly_hours_viewed',title='hours viewed',format=','),
+                alt.Tooltip('weekly_rank',title='rank'),
+                alt.Tooltip('season_title',title='season')],
+                color='show_title',
+                strokeDash='show_title',)
+            st.altair_chart(trend, use_container_width=True)
+            show = st.checkbox("show or hide list", value=False, key="movie")
+            data.loc[:, "weekly_hours_viewed"] = data['weekly_hours_viewed'].map('{:,d}'.format)
+            if show:
+                st.dataframe(data, use_container_width=True)
+               
